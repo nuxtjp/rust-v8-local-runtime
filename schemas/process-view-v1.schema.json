@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "nuxtjp://local-runtime/process-view/v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["capability_id", "view_id", "payload"],
+  "properties": {
+    "capability_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "view_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "payload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["title", "summary", "status_label", "highlighted"],
+      "properties": {
+        "title": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "summary": { "type": "string", "minLength": 1, "maxLength": 2000 },
+        "status_label": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "highlighted": { "type": "boolean" }
+      }
+    }
+  }
+}
