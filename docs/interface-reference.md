@@ -1,41 +1,6 @@
-# rust-v8-local-runtime
+# rust-v8-local-runtime interface reference
 
-ブラウザと許可されたローカルサービスを、制限付きのループバックAPIで接続できます。
-
-## 利用前の確認
-
-実装済みの範囲、必要な依存関係、検証コマンドを以下の英語説明に併記しています。操作・配備・公開は、それぞれの権限と設定を確認してから実施してください。
-
-## 使い方
-
-リポジトリ内のサンプル・スキーマ・実装を確認し、用途に必要な入力を明示して利用します。下記のGetting startedに、現行設定に対応する検証コマンドを示しています。
-
-検証結果は実行した範囲だけを示します。未実装の機能、未設定の接続、配備環境の確認を合格扱いにしないでください。
-
-## English
-
-Host a bounded loopback connection between a Nuxt browser session and declared local services.
-
-## What you can do
-
-- Validate origins, capability schemas and response limits.
-- Delegate view generation through a selected engine boundary.
-
-## Current scope
-
-The operator supplies reviewed configuration. Host readiness does not establish that every service or engine is available.
-
-Package distribution is not activated by this documentation. Use the checked-in source and the declared dependency versions; published availability must be verified separately.
-
-## Getting started
-
-Install Rust 1.97 or newer and make the declared dependencies available. Use the configured private registry when a dependency is not distributed publicly. Run from this repository:
-
-```sh
-cargo test --locked
-```
-
-## Examples and interface details
+Use the [usage guide](getting-started.md) for the first steps. This reference preserves the current interface details and operational limits. Run command examples from the repository root, after preparing the exact declared dependencies and registered configuration.
 
 ## Payload contracts
 
@@ -91,6 +56,17 @@ empty environment, bounded stdin/stdout/stderr pipes, and a host-side kill
 deadline. Unknown JSON fields, response identity changes, correlation changes,
 and payload-schema changes fail closed.
 
+## Closed boundary
+
+- numeric loopback bind only;
+- exact allowed Origin and audience;
+- random in-memory session tokens;
+- capability, classification ceiling, expiry, nonce, byte, and message checks;
+- no HTTP client or other outbound-network dependency;
+- no provider credentials;
+- no remote persistence;
+- no implicit connection to Hatter or any ecosystem product.
+
 ## Commands
 
 `validate-config` does not start a server. It emits one
@@ -122,11 +98,3 @@ cargo run --locked --offline -- \
 `render` processes one complete session/view flow without opening a server.
 It is rejected for simulation configurations, just as `simulate` is rejected
 for ready configurations.
-
-## Documentation and source
-
-[Interface reference](docs/interface-reference.md)
-
-[Usage guide](docs/getting-started.md)
-
-[Examples](examples) · [Schemas](schemas) · [Implementation and public interfaces](src) · [Verification cases](tests) · [Contributing](CONTRIBUTING.md) · [Security reporting](SECURITY.md) · [License](LICENSE) · [Attribution notices](NOTICE)
